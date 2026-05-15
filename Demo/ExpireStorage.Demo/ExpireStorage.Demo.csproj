@@ -10,13 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Drogecode.Blazor.ExpireStorage" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.8" PrivateAssets="all" />
     <PackageReference Include="MudBlazor" Version="9.4.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Src\Drogecode.Blazor.ExpireStorage\Drogecode.Blazor.ExpireStorage.csproj" />
   </ItemGroup>
 
   <ItemGroup>
