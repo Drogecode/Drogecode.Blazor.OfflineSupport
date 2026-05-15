@@ -8,6 +8,8 @@ Configure if the api should be called or the cached value will be returned if av
 
 Ideal for Blazor WebAssembly PWA's, that should work offline.
 
+[Deme site](https://drogecode.github.io/Drogecode.Blazor.ExpireStorage/)
+
 ## Installing
 
 To install the package, add the following line to the csproj file. Replacing x.x.x with the latest version number (found at the top of this file):
@@ -96,7 +98,7 @@ You can give optional settings to the CachedRequest object.
 | ExpireSessionStorage   | The DateTime the sessionstorage value will be expired.                                                                                                                                    | 15 minutes |
 | IgnoreCache            | If true, never return a cached result.                                                                                                                                                    | false      |
 | CachedAndReplace       | If true, The cached result will be returned and the cache will be refreshed for the next call. If no cache is found, the default or NULL value will be returned.                          | false      |
-| CacheWhenOffline       | If true, the cached result will be returned when offline, except when IgnoreCache is true.                                                                                                | false      |
+| CacheWhenOffline       | If true, the cached result will be returned when offline, except when IgnoreCache is true.                                                                                                | true       |
 | RetryOnJsonException   | If true, If a JSON exception occurs, the cache will be cleared and the request will be retried once. This will minimize the effect if a breaking change was introduced in the JSON value. | true       |
 
 ### Global settings
