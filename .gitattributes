@@ -5,3 +5,6 @@ _framework/** binary
 *.dll binary
 *.pdb binary
 *.js binary
+*.dat binary
+*.json binary
+*.blat binary
