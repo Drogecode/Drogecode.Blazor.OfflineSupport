@@ -41,4 +41,9 @@ public class CachedRequest
     /// Retry once on JsonException.
     /// </summary>
     public bool RetryOnJsonException { get; set; } = true;
+    
+    /// <summary>
+    /// Retry when this is the call that triggers the offline state. 
+    /// </summary>
+    public bool RetryOnFreshOffline { get; set; } = true;
 }

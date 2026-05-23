@@ -112,7 +112,14 @@ public class ExpireStorageService : IExpireStorageService
         catch (HttpRequestException)
         {
             ConsoleHelper.WriteLine("HttpRequestException");
+            var oldOffline = IsOffline;
             IsOffline = true;
+            if (!oldOffline && request is { CacheWhenOffline: true, RetryOnFreshOffline: true }) // Only retry once
+            {
+                ConsoleHelper.WriteLine($"Retry calling offline {cacheKey}");
+                request.RetryOnFreshOffline = false;
+                return await CachedRequestAsync(cacheKey, function, request, defaultResponse, clt);
+            }
         }
         catch (TaskCanceledException)
         {

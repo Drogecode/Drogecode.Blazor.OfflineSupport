@@ -34,6 +34,7 @@ public sealed partial class Home : IDisposable
         StateHasChanged();
         _cachedRequest.ExpireLocalStorage = DateTime.UtcNow.AddDays(_storageSettings.LocalStorageDaysInFuture);
         _cachedRequest.ExpireSession = DateTime.UtcNow.AddMinutes(_storageSettings.SessionStorageMinutesInFuture);
+        _cachedRequest.RetryOnFreshOffline = true;
 
         var value = await StorageService.CachedRequestAsync(_storageSettings.Key,
             async () => await FunctionToCall(),
