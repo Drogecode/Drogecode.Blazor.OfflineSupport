@@ -9,9 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Drogecode.Blazor.OfflineSupport" Version="1.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.8" PrivateAssets="all" />
-    <PackageReference Include="MudBlazor" Version="9.4.0" />
+    <PackageReference Include="MudBlazor" Version="9.5.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,10 +20,6 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Src\Drogecode.Blazor.OfflineSupport\Drogecode.Blazor.OfflineSupport.csproj" />
   </ItemGroup>
 
 </Project>
