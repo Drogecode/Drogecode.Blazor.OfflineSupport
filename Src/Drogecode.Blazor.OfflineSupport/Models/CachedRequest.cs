@@ -1,0 +1,49 @@
+﻿namespace Drogecode.Blazor.OfflineSupport;
+
+public class CachedRequest
+{
+    /// <summary>
+    /// One call per session, but not expired.
+    /// </summary>
+    public bool OneCallPerSession { get; set; }
+
+    /// <summary>
+    /// One call per local storage cache, but not expired.
+    /// </summary>
+    public bool OneCallPerLocalStorage { get; set; }
+    
+    /// <summary>
+    /// Will be deleted from local storge when this time has passed. UTC
+    /// </summary>
+    public DateTime ExpireLocalStorage { get; set; } = DateTime.UtcNow.AddDays(7);
+
+    /// <summary>
+    /// If one call per session, expire after set time UTC
+    /// </summary>
+    public DateTime ExpireSession { get; set; } = DateTime.UtcNow.AddMinutes(15);
+
+    /// <summary>
+    /// Ignore session and local storage cache
+    /// </summary>
+    public bool IgnoreCache { get; set; }
+
+    /// <summary>
+    /// Return cached but also call for update
+    /// </summary>
+    public bool CachedAndReplace { get; set; }
+
+    /// <summary>
+    /// Always return the cached response when offline, except when IgnoreCache is true.
+    /// </summary>
+    public bool CacheWhenOffline { get; set; } = true;
+
+    /// <summary>
+    /// Retry once on JsonException.
+    /// </summary>
+    public bool RetryOnJsonException { get; set; } = true;
+    
+    /// <summary>
+    /// Retry when this is the call that triggers the offline state. 
+    /// </summary>
+    public bool RetryOnFreshOffline { get; set; } = true;
+}

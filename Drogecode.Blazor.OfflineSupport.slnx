@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Demo/">
+    <Project Path="Demo/OfflineSupport.Demo/OfflineSupport.Demo.csproj" />
+  </Folder>
+  <Folder Name="/SolutionFiles/">
+    <File Path=".github/workflows/on-push.yml" />
+    <File Path=".github/workflows/static.yml" />
+  </Folder>
+  <Project Path="Src/Drogecode.Blazor.OfflineSupport/Drogecode.Blazor.OfflineSupport.csproj" />
+  <Project Path="Tests/Drogecode.Blazor.OfflineSupport.Tests/Drogecode.Blazor.OfflineSupport.Tests.csproj" />
+</Solution>

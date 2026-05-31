@@ -1,8 +1,0 @@
-﻿@using ExpireStorage.Demo.Enums
-
-<MudIconButton id="dark-light-toggle" Icon="@(DarkModeToggle switch
-                                            {
-                                                DarkLightMode.System => @Icons.Material.Filled.AutoMode,
-                                                DarkLightMode.Dark => @Icons.Material.Rounded.DarkMode,
-                                                _ => @Icons.Material.Outlined.LightMode
-                                            })" Color="Color.Inherit" OnClick="@ToggleDarkLight" />
