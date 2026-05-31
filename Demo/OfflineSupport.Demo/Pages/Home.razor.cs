@@ -8,7 +8,7 @@ namespace OfflineSupport.Demo.Pages;
 
 public sealed partial class Home : IDisposable
 {
-    [Inject, NotNull] private IExpireStorageService? StorageService { get; set; }
+    [Inject, NotNull] private IOfflineSupportService? StorageService { get; set; }
 
     private readonly CancellationTokenSource _cls = new();
     private DemoModelForStorage _model = new();
@@ -23,8 +23,8 @@ public sealed partial class Home : IDisposable
 
     protected override void OnInitialized()
     {
-        ExpireStorageService.LogToConsole = true;
-        ExpireStorageService.IsOfflineChanged += OfflineChanged;
+        OfflineSupportService.LogToConsole = true;
+        OfflineSupportService.IsOfflineChanged += OfflineChanged;
     }
 
     private async Task Save()

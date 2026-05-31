@@ -4,7 +4,7 @@ using Drogecode.Blazor.OfflineSupport.Helpers;
 
 namespace Drogecode.Blazor.OfflineSupport;
 
-public class ExpireStorageService : IExpireStorageService
+public class OfflineSupportService : IOfflineSupportService
 {
     private readonly ILocalStorageExpireService _localStorageExpireService;
     private readonly ISessionExpireService _sessionStorageExpireService;
@@ -36,7 +36,7 @@ public class ExpireStorageService : IExpireStorageService
         set => ConsoleHelper.LogToConsole = value;
     }
 
-    public ExpireStorageService(
+    public OfflineSupportService(
         ILocalStorageExpireService localStorageExpireService,
         ISessionExpireService sessionStorageExpireService)
     {

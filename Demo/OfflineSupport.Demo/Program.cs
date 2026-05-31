@@ -15,6 +15,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddScoped<ILocalUserSettingService, LocalUserSettingService>();
 
 // Adds expire storage services
-builder.Services.AddExpireStorage();
+builder.Services.AddOfflineSupport();
 
 await builder.Build().RunAsync();

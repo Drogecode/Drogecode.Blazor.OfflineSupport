@@ -1,6 +1,6 @@
-[![Nuget version](https://img.shields.io/nuget/v/Drogecode.Blazor.ExpireStorage.svg?logo=nuget)](https://www.nuget.org/packages/Drogecode.Blazor.ExpireStorage/)
+[![Nuget version](https://img.shields.io/nuget/v/Drogecode.Blazor.OfflineSupport.svg?logo=nuget)](https://www.nuget.org/packages/Drogecode.Blazor.OfflineSupport/)
 
-# Drogecode.Blazor.ExpireStorage
+# Drogecode.Blazor.OfflineSupport
 
 Store api responses in localstorage and sessionstorage.
 
@@ -8,20 +8,20 @@ Configure if the api should be called or the cached value will be returned if av
 
 Ideal for Blazor WebAssembly PWA's, that should work offline.
 
-[Deme site](https://drogecode.github.io/Drogecode.Blazor.ExpireStorage/)
+[Deme site](https://drogecode.github.io/Drogecode.Blazor.OfflineSupport/)
 
 ## Installing
 
 To install the package, add the following line to the csproj file. Replacing x.x.x with the latest version number (found at the top of this file):
 
 ```
-<PackageReference Include="Drogecode.Blazor.ExpireStorage" Version="x.x.x" />
+<PackageReference Include="Drogecode.Blazor.OfflineSupport" Version="x.x.x" />
 ```
 
 You can also install via the .NET CLI with the following command:
 
 ```
-dotnet add package Drogecode.Blazor.ExpireStorage
+dotnet add package Drogecode.Blazor.OfflineSupport
 ```
 
 If you're using Visual Studio you can also install via the built in NuGet package manager.
@@ -33,7 +33,7 @@ You will need to register the expire storage services with the service collectio
 ```c#
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddExpireStorage();
+    services.AddOfflineSupport();
 }
 ``` 
 
@@ -45,7 +45,7 @@ public static async Task Main(string[] args)
     var builder = WebAssemblyHostBuilder.CreateDefault(args);
     builder.RootComponents.Add<App>("app");
 
-    builder.Services.AddExpireStorage();
+    builder.Services.AddOfflineSupport();
 
     await builder.Build().RunAsync();
 }
@@ -66,7 +66,7 @@ public static async Task Main(string[] args)
 ### Example
 
 ```c#
-@inject Drogecode.Blazor.ExpireStorage.IExpireStorageService storageService
+@inject Drogecode.Blazor.OfflineSupport.IOfflineSupportService storageService
 
 @code {
     
@@ -107,21 +107,21 @@ You can give optional settings to the CachedRequest object.
 
 On, for example, MainLayout.razor.cs, you can set the Postfix to be used for all requests. This is useful if you have multiple users using the same app from the same browser.
 
-`ExpireStorageService.Postfix = userId.ToString();`
+`OfflineSupportService.Postfix = userId.ToString();`
 
 #### IsOffline
 
-ExpireStorageService knows two properties to monitor if the app is offline.
+OfflineSupportService knows two properties to monitor if the app is offline.
 
 IsOffline is true when the last request had an `HttpRequestException`, after a successful request IsOffline will be false.
 
-`ExpireStorageService.IsOffline` and `ExpireStorageService.IsOfflineChanged`
+`OfflineSupportService.IsOffline` and `OfflineSupportService.IsOfflineChanged`
 
 #### LogToConsole
 
-ExpireStorageService can log to the console if you want to see what is happening, *default: false*.
+OfflineSupportService can log to the console if you want to see what is happening, *default: false*.
 
-`ExpireStorageService.LogToConsole = true;`
+`OfflineSupportService.LogToConsole = true;`
 
 ### ICacheableResponse
 
@@ -129,7 +129,7 @@ If a response object implements ICacheableResponse, the HandledBy property will 
 the caller was used.
 
 ```c#
-using Drogecode.Blazor.ExpireStorage;
+using Drogecode.Blazor.OfflineSupport;
 public class YourObjectResponse : ICacheableResponse
 {
     ...

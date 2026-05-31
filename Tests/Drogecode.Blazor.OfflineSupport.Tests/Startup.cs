@@ -12,7 +12,7 @@ public class Startup
         services.AddMemoryCache();
         services.AddScoped<ILocalStorageExpireService, LocalStorageExpireService>();
         services.AddScoped<ISessionExpireService, SessionExpireService>();
-        services.AddScoped<IExpireStorageService, ExpireStorageService>();
+        services.AddScoped<IOfflineSupportService, OfflineSupportService>();
         
         services.AddScoped<IJSRuntime, JSRuntimeMock>();
         services.AddScoped<IJsStorageService, MockJsStorageService>();

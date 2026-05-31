@@ -4,12 +4,12 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>1.0.2</Version>
-    <Title>Drogecode.Blazor.ExpireStorage</Title>
+    <Version>1.0.3</Version>
+    <Title>Drogecode.Blazor.OfflineSupport</Title>
     <Authors>Taco Droogers</Authors>
-    <PackageProjectUrl>https://github.com/Drogecode/Drogecode.Blazor.ExpireStorage</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Drogecode/Drogecode.Blazor.ExpireStorage</RepositoryUrl>
-    <Description>Adds a wrapper on top of Blazored.LocalStorage and Blazored.SessionStorage to expire items from localstorage and sessionstorage after a specified time.</Description>
+    <PackageProjectUrl>https://github.com/Drogecode/Drogecode.Blazor.OfflineSupport</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Drogecode/Drogecode.Blazor.OfflineSupport</RepositoryUrl>
+    <Description>Saves api responses in the localstorage or the sessionstorage for offline support.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -19,11 +19,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DocumentationFile>bin\Debug\Drogecode.Blazor.ExpireStorage.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\Drogecode.Blazor.OfflineSupport.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DocumentationFile>bin\Release\Drogecode.Blazor.ExpireStorage.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\Drogecode.Blazor.OfflineSupport.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

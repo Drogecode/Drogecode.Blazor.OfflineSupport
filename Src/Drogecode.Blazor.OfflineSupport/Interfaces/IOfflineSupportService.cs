@@ -2,7 +2,7 @@
 
 namespace Drogecode.Blazor.OfflineSupport;
 
-public interface IExpireStorageService
+public interface IOfflineSupportService
 {
     /// <summary>
     /// Caches the request and returns the response.
