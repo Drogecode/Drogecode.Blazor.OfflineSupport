@@ -59,9 +59,9 @@ public static async Task Main(string[] args)
 |---------------------------|------------------------------------------------------------------------------------------|----------|
 | string cacheKey           | The key to use for the cache.                                                            | Required |
 | Func<Task<TRes>> function | The function to call.                                                                    | Required |
-| CachedRequest? request    | settings for the cache request (explained below).                                        | Optional |
-| TRes? defaultResponse     | default value to return if the function failed or was not called and the cache is empty. | Optional |
-| CancellationToken clt     | a cancellation token.                                                                    | Optional |
+| CachedRequest? request    | Settings for the cache request (explained below).                                        | Optional |
+| TRes? defaultResponse     | Default value to return if the function failed or was not called and the cache is empty. | Optional |
+| CancellationToken clt     | A cancellation token.                                                                    | Optional |
 
 ### Example
 
@@ -90,16 +90,16 @@ public static async Task Main(string[] args)
 
 You can give optional settings to the CachedRequest object.
 
-| Parameter              | Description                                                                                                                                                                               | Default    |
-|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
-| OneCallPerLocalStorage | If true, the result will be returned from localstorage if it is not expired.                                                                                                              | false      |
-| OneCallPerSession      | If true, the result will be returned from sessionstorage if it is not expired.                                                                                                            | false      |
-| ExpireLocalStorage     | The DateTime the localstorage value will be expired.                                                                                                                                      | 7 days     |
-| ExpireSessionStorage   | The DateTime the sessionstorage value will be expired.                                                                                                                                    | 15 minutes |
-| IgnoreCache            | If true, never return a cached result.                                                                                                                                                    | false      |
-| CachedAndReplace       | If true, The cached result will be returned and the cache will be refreshed for the next call. If no cache is found, the default or NULL value will be returned.                          | false      |
-| CacheWhenOffline       | If true, the cached result will be returned when offline, except when IgnoreCache is true.                                                                                                | true       |
-| RetryOnJsonException   | If true, If a JSON exception occurs, the cache will be cleared and the request will be retried once. This will minimize the effect if a breaking change was introduced in the JSON value. | true       |
+| Parameter              | Description                                                                                                                                                      | Default    |
+|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| OneCallPerLocalStorage | If true, the result will be returned from localstorage if it is not expired.                                                                                     | false      |
+| OneCallPerSession      | If true, the result will be returned from sessionstorage if it is not expired. Only writes to session if this is true.                                           | false      |
+| ExpireLocalStorage     | The DateTime the localstorage value will be expired.                                                                                                             | 7 days     |
+| ExpireSessionStorage   | The DateTime the sessionstorage value will be expired.                                                                                                           | 15 minutes |
+| IgnoreCache            | If true, never return a cached result.                                                                                                                           | false      |
+| CachedAndReplace       | If true, The cached result will be returned and the cache will be refreshed for the next call. If no cache is found, the default or NULL value will be returned. | false      |
+| CacheWhenOffline       | If true, the cached result will be returned when offline, except when IgnoreCache is true.                                                                       | true       |
+| WriteCache             | If true, Writes response to localstorage cache.                                                                                                                  | true       |
 
 ### Global settings
 

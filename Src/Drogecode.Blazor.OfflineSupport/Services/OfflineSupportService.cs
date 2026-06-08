@@ -149,7 +149,11 @@ public class OfflineSupportService : IOfflineSupportService
     private async Task<TRes?> RunSaveAndReturn<TRes>(string cacheKey, Func<Task<TRes>> function, CachedRequest request, CancellationToken clt)
     {
         var result = await function();
-        await _localStorageExpireService.SetItemAsync(cacheKey, result, request.ExpireLocalStorage, clt);
+        if (request.WriteCache)
+        {
+            await _localStorageExpireService.SetItemAsync(cacheKey, result, request.ExpireLocalStorage, clt);
+        }
+
         if (request.OneCallPerSession)
         {
             await _sessionStorageExpireService.SetItemAsync(cacheKey, result, request.ExpireSession, clt);

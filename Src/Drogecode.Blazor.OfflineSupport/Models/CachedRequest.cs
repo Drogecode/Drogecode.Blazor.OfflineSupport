@@ -26,6 +26,11 @@ public class CachedRequest
     /// Ignore session and local storage cache
     /// </summary>
     public bool IgnoreCache { get; set; }
+    
+    /// <summary>
+    /// Write to the local storage cache
+    /// </summary>
+    public bool WriteCache { get; set; } = true;
 
     /// <summary>
     /// Return cached but also call for update
