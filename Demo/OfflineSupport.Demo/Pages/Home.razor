@@ -18,7 +18,7 @@
     <MudSwitch T="bool" @bind-Value="_cachedRequest.IgnoreCache" Label="Ignore cache" />
     <MudSwitch T="bool" @bind-Value="_cachedRequest.CachedAndReplace" Label="Cached and replace" />
     <MudSwitch T="bool" @bind-Value="_cachedRequest.CacheWhenOffline" Label="Always cache when offline" />
-    <MudSwitch T="bool" @bind-Value="_cachedRequest.RetryOnJsonException" Label="Retry on JSON exception" />
+    <MudSwitch T="bool" @bind-Value="_cachedRequest.WriteCache" Label="Write cache" />
     <MudSwitch T="bool" @bind-Value="_storageSettings.MockOffline" Label="Mock offline" />
     <MudNumericField T="int" @bind-Value="@_storageSettings.ResponseDelayInMs" Label="Delay response (ms)" />
 </MudForm>
