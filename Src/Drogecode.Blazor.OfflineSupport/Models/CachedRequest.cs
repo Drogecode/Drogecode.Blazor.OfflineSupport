@@ -41,14 +41,4 @@ public class CachedRequest
     /// Always return the cached response when offline, except when IgnoreCache is true.
     /// </summary>
     public bool CacheWhenOffline { get; set; } = true;
-
-    /// <summary>
-    /// Retry once on JsonException.
-    /// </summary>
-    public bool RetryOnJsonException { get; set; } = true;
-    
-    /// <summary>
-    /// Retry when this is the call that triggers the offline state. 
-    /// </summary>
-    public bool RetryOnFreshOffline { get; set; } = true;
 }

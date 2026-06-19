@@ -52,6 +52,18 @@ public class OfflineSupportService : IOfflineSupportService
         TRes? defaultResponse = default,
         CancellationToken clt = default)
     {
+        return await CachedRequestInternalAsync(cacheKey, function, request, defaultResponse, retryOnFreshOffline: true, retryOnJsonException: true, clt);
+    }
+
+    private async Task<TRes?> CachedRequestInternalAsync<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TRes>(
+        string cacheKey,
+        Func<Task<TRes>> function,
+        CachedRequest? request = null,
+        TRes? defaultResponse = default,
+        bool retryOnFreshOffline = true,
+        bool retryOnJsonException = true,
+        CancellationToken clt = default)
+    {
         request ??= new CachedRequest();
         try
         {
@@ -93,7 +105,7 @@ public class OfflineSupportService : IOfflineSupportService
             {
                 return await RunSaveAndReturn(cacheKey, function, request, clt);
             }
-            
+
             var cacheResult = await _localStorageExpireService.GetItemAsync<TRes?>(cacheKey, clt);
             if (cacheResult is not null)
             {
@@ -114,11 +126,10 @@ public class OfflineSupportService : IOfflineSupportService
             ConsoleHelper.WriteLine("HttpRequestException");
             var oldOffline = IsOffline;
             IsOffline = true;
-            if (!oldOffline && request is { CacheWhenOffline: true, RetryOnFreshOffline: true }) // Only retry once
+            if (!oldOffline && retryOnFreshOffline && request is { CacheWhenOffline: true }) // Only retry once
             {
                 ConsoleHelper.WriteLine($"Retry calling offline {cacheKey}");
-                request.RetryOnFreshOffline = false;
-                return await CachedRequestAsync(cacheKey, function, request, defaultResponse, clt);
+                return await CachedRequestInternalAsync(cacheKey, function, request, defaultResponse, retryOnFreshOffline: false, retryOnJsonException, clt);
             }
         }
         catch (TaskCanceledException)
@@ -129,11 +140,10 @@ public class OfflineSupportService : IOfflineSupportService
             // The object definition could be changed with an update. Deleting the old version and retrying again to get the latest version.
             ConsoleHelper.WriteLine($"JsonException for {cacheKey}, Deleting");
             await _localStorageExpireService.DeleteItemAsync(cacheKey, clt);
-            if (request.RetryOnJsonException) // Only retry once
+            if (retryOnJsonException) // Only retry once
             {
                 ConsoleHelper.WriteLine($"Retry calling {cacheKey}");
-                request.RetryOnJsonException = false;
-                return await CachedRequestAsync(cacheKey, function, request, defaultResponse, clt);
+                return await CachedRequestInternalAsync(cacheKey, function, request, defaultResponse, retryOnFreshOffline, false, clt);
             }
 
             ConsoleHelper.WriteLine($"Will not retry {cacheKey}");
