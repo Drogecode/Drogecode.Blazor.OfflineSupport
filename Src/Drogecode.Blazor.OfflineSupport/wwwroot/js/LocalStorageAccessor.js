@@ -1,4 +1,4 @@
 export function getAll() {
-    return Object.assign({}, localStorage);
+    return { ...localStorage };
 }
 //# sourceMappingURL=LocalStorageAccessor.js.map

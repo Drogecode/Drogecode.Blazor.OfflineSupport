@@ -5,6 +5,7 @@
   <Folder Name="/SolutionFiles/">
     <File Path=".github/workflows/on-push.yml" />
     <File Path=".github/workflows/static.yml" />
+    <File Path="README.md" />
   </Folder>
   <Project Path="Src/Drogecode.Blazor.OfflineSupport/Drogecode.Blazor.OfflineSupport.csproj" />
   <Project Path="Tests/Drogecode.Blazor.OfflineSupport.Tests/Drogecode.Blazor.OfflineSupport.Tests.csproj" />
