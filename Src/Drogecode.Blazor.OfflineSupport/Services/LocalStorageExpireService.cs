@@ -11,7 +11,7 @@ public class LocalStorageExpireService : ILocalStorageExpireService
 {
     private readonly IJsStorageService _jsStorageService;
     private readonly IJSRuntime _jsRuntime;
-    private Lazy<IJSObjectReference> _accessorJsRef = new();
+    private IJSObjectReference? _accessorJsRef;
 
     public LocalStorageExpireService(IJsStorageService jsStorageService, IJSRuntime jsRuntime)
     {
@@ -33,12 +33,7 @@ public class LocalStorageExpireService : ILocalStorageExpireService
             }
 
             var ttl = DateTime.UtcNow.Ticks;
-            if (_accessorJsRef.IsValueCreated is false)
-            {
-                _accessorJsRef = new Lazy<IJSObjectReference>(await _jsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/Drogecode.Blazor.OfflineSupport/js/LocalStorageAccessor.js"));
-            }
-
-            var packages = await _accessorJsRef.Value.InvokeAsync<Dictionary<string, string>?>("getAll");
+            var packages = await GetAllLocalStorageItemsAsync();
             if (packages is null)
             {
                 ConsoleHelper.WriteLine("No packages found");
@@ -90,10 +85,49 @@ public class LocalStorageExpireService : ILocalStorageExpireService
         }
         finally
         {
-            if (_accessorJsRef.IsValueCreated)
+            if (_accessorJsRef is not null)
             {
-                await _accessorJsRef.Value.DisposeAsync();
+                try
+                {
+                    await _accessorJsRef.DisposeAsync();
+                }
+                catch (Exception ex)
+                {
+                    ConsoleHelper.WriteLine("Failed to dispose JS accessor module", ex);
+                }
             }
+        }
+    }
+
+    private async Task<Dictionary<string, string>?> GetAllLocalStorageItemsAsync()
+    {
+        // Try importing JS module first
+        try
+        {
+            if (_accessorJsRef is null)
+            {
+                _accessorJsRef = await _jsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/Drogecode.Blazor.OfflineSupport/js/LocalStorageAccessor.js");
+            }
+
+            if (_accessorJsRef is not null)
+            {
+                return await _accessorJsRef.InvokeAsync<Dictionary<string, string>?>("getAll");
+            }
+        }
+        catch (Exception ex)
+        {
+            ConsoleHelper.WriteLine("Failed to load or execute LocalStorageAccessor.js module, falling back to direct eval", ex);
+        }
+
+        // Fallback: direct eval in case module loading was blocked/corrupted by service worker or network issue
+        try
+        {
+            return await _jsRuntime.InvokeAsync<Dictionary<string, string>?>("eval", "Object.assign({}, localStorage)");
+        }
+        catch (Exception ex)
+        {
+            ConsoleHelper.WriteLine("Failed to retrieve localStorage items via fallback eval", ex);
+            return null;
         }
     }
 
