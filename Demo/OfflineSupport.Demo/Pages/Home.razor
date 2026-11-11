@@ -20,7 +20,7 @@
     <MudSwitch T="bool" @bind-Value="_cachedRequest.CacheWhenOffline" Label="Always cache when offline" Color="Color.Primary" />
     <MudSwitch T="bool" @bind-Value="_cachedRequest.WriteCache" Label="Write cache" Color="Color.Primary" />
     <MudSwitch T="bool" @bind-Value="_storageSettings.MockOffline" Label="Mock offline" Color="Color.Primary" />
-    <MudNumericField T="int" @bind-Value="@_storageSettings.ResponseDelayInMs" Label="Delay response (ms)" />
+    <MudNumericField T="int" @bind-Value="@_storageSettings.ResponseDelayInMs" Label="Delay fake api response (ms)" />
 </MudForm>
 
 <MudButton Variant="Variant.Filled" Color="Color.Primary" DropShadow="false" OnClick="@Save">Save</MudButton>

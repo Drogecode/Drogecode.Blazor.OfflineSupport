@@ -18,7 +18,7 @@ public sealed partial class Home : IDisposable
 
     private string _response = string.Empty;
     private HandledBy _handledBy = HandledBy.None;
-    private bool _isOffline = false;
+    private bool _isOffline;
 
 
     protected override void OnInitialized()
@@ -36,7 +36,7 @@ public sealed partial class Home : IDisposable
         _cachedRequest.ExpireSession = DateTime.UtcNow.AddMinutes(_storageSettings.SessionStorageMinutesInFuture);
 
         var value = await StorageService.CachedRequestAsync(_storageSettings.Key,
-            async () => await FunctionToCall(),
+            async () => await FakeApiCall(),
             _cachedRequest,
             new DemoModelForStorage { Data = "Default object returned." },
             _cls.Token);
@@ -46,7 +46,7 @@ public sealed partial class Home : IDisposable
     }
 
     // This function could be a call to a server side API.
-    private async Task<DemoModelForStorage> FunctionToCall()
+    private async Task<DemoModelForStorage> FakeApiCall()
     {
         if (_storageSettings.ResponseDelayInMs > 0)
         {
